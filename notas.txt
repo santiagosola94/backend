@@ -1,0 +1,50 @@
+Comandos para la entrega:
+
+I) Agregar numero de procesadores en la vista info:
+    localhost:8080/info
+
+II) Ejecutar el servidor en modo FORK y CLUSTER con nodemon
+    a. nodemon parte1.js -p 8081 -m FORK
+    b. nodemon parte1.js -p 8081 -m CLUSTER
+
+III) Ejecutar el servidor utilizando forever
+    a. Fork:
+        forever start parte1.js --p 8081 --m FORK
+        forever start parte1.js --p 8082 --m FORK
+        forever start parte1.js --p 8083 --m FORK
+
+    b. Cluster:
+        forever start parte1.js --p 8084 --m CLUSTER
+
+IV) Ejecutar el servidor (con los parametros en fork) utilizando PM2 utilizando modo fork y Cluster
+    a. Fork:
+        pm2 start parte1.js --name="Fork 1" -- -p 8081 -m FORK
+        pm2 start parte1.js --name="Fork 2" -- -p 8082 -m FORK
+        pm2 start parte1.js --name="Fork 3" -- -p 8083 -m FORK
+
+    b. Cluster: (el -m FORK no lo pongo, porque por defecto se pone en fork)
+        pm2 start parte1.js --name="CLUSTER" -i max -- -p 8084
+
+V) Tanto en forever como en PM2 permitir el modo escucha para que la actualizacion del codigo se refleje
+instantaneamente:
+    a. Forever: (modificar)
+        forever start parte1.js -watch --p 8081 --m FORK
+
+    b. PM2:
+        pm2 start parte1.js --name="Fork 1" --watch -- -p 8081 -m FORK
+        pm2 start parte1.js --name="Fork 2" --watch -- -p 8082 -m FORK
+        pm2 start parte1.js --name="Fork 3" --watch -- -p 8083 -m FORK
+
+VI) Hacer pruebas de finalizacion de procesos fork y cluster en los casos que corresponda.
+    a. Nodemon: Si cerramos un proceso con taskkill, se cae el servidor
+    b. Forever: Si cerramos un proceso con el taskkill, se abre de nuevo automaticamente.
+    c. PM2: Igual que forever.
+
+VII) Redirigir todas las consultas a /api/randoms a un cluster de servidores en el puerto 8081
+    pm2 start cluster2.js --name="Cluster Nativo" -- 8081 CLUSTER
+
+VIII) Modificar la configuracion para que las consultas a /api/randoms sean redirigidas a un cluster con NGINX:
+    pm2 start cluster2.js --name="Cluster 1" -- 8082
+    pm2 start cluster2.js --name="Cluster 2" -- 8083
+    pm2 start cluster2.js --name="Cluster 3" -- 8084
+    pm2 start cluster2.js --name="Cluster 4" -- 8085
