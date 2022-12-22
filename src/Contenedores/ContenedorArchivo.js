@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs'
 import Configuraciones from '../config.js';
 import {normalize, schema} from 'normalizr'
+import logger from '../Loggers/loggers.js';
 
 class ContenedorArchivo {
     constructor(ruta) {
@@ -14,6 +15,7 @@ class ContenedorArchivo {
             const mensajesNormalizados = this.normalizar(messageList)
             return mensajesNormalizados
         } catch (error) {
+            logger.error(`No se pudo completar la accion`)
             throw new Error(error);
         }
     }
@@ -38,6 +40,7 @@ class ContenedorArchivo {
                 const arrayMensajesStringify = JSON.stringify(mensajesProductos)
                 await fs.writeFile(this.ruta, `${arrayMensajesStringify}`)
         } catch (error) {
+            logger.error(`Error al crear: ${error}`)
             throw new Error(`Error al crear: ${error}`)
         }
     }

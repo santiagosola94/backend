@@ -1,0 +1,20 @@
+1) Incorporar al proyecto de servidor de trabajo la compresión gzip.
+Verificar sobre la ruta /info con y sin compresión, la diferencia de cantidad de bytes devueltos en un caso y otro.
+
+    a. Bytes sin compresion = 4.1 kb
+    b. Bytes con compresion = 1.7 kb
+
+2) 
+node --prof main.js
+artillery quick --count 50 --num 20 "http://localhost:8080/info" --output artilleryInfo.txt
+node autocannon.js
+
+*cambiar el nombre del archivo*
+
+node --prof-process performanceNodeProf.log
+node --prof-process performanceNodeProf1.log
+
+3) node --inspect main.js
+
+
+4) 0x -o main.js -p 8081

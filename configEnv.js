@@ -1,9 +1,11 @@
 import * as dotenv from 'dotenv'
+import logger from './src/Loggers/loggers.js'
+
 
 const configEnv = ()=>{
     dotenv.config()
     
-    console.log({test: process.env.TEST})
+    logger.info({test: process.env.TEST})
 }
 
 export default configEnv

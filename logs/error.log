@@ -1,0 +1,9 @@
+[2022-12-21T19:23:54.882] [ERROR] default - Se intento entrar a la ruta /random, con el metodo GET
+[2022-12-21T19:23:58.106] [ERROR] default - Se intento entrar a la ruta /random, con el metodo GET
+[2022-12-21T19:32:34.079] [ERROR] default - No se pudo conectar a mongo Atlas MongoServerError: bad auth : authentication failed
+[2022-12-21T19:45:03.462] [ERROR] default - No se pudo conectar a mongo Atlas MongoServerError: bad auth : authentication failed
+[2022-12-21T19:46:07.511] [ERROR] default - No se pudo conectar a mongo Atlas 
+[2022-12-21T19:46:34.248] [ERROR] default - No se pudo conectar a mongo Atlas MongoServerError: bad auth : authentication failed
+[2022-12-21T19:48:08.072] [ERROR] default - No se pudo conectar a mongo Atlas MongoServerError: bad auth : authentication failed
+[2022-12-21T19:54:29.732] [ERROR] default - No se pudo conectar a mongo Atlas MongoServerError: bad auth : authentication failed
+[2022-12-21T19:54:49.229] [ERROR] default - No se pudo conectar a mongo Atlas MongoServerError: bad auth : authentication failed

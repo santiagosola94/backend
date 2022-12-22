@@ -28,6 +28,12 @@ import argumentos from './src/minimist/minimist.js';
 import routerAleatorio from './src/Router/api-randoms.js';
 import configEnv from './configEnv.js';
 import {cpus} from 'os'
+import compression from 'compression'
+import logger from './src/Loggers/loggers.js';
+
+
+
+
 
 const cpu = cpus().length
 
@@ -63,6 +69,11 @@ const server = ()=>{
     
     app.set('views', './views')
     app.set('view engine', 'hbs')
+
+    app.use((req,res,next)=>{
+        logger.info(`Peticion con metodo ${req.method} en la url ${req.url}`)
+        next()
+    })
     
     const advanceOptions = { useNewUrlParser: true, useUnifiedTopology: true }
     
@@ -191,7 +202,7 @@ const server = ()=>{
         }
     })
 
-    app.get('/info', (req,res)=>{
+    app.get('/info', compression(), (req,res)=>{
         const data = {
             argumentosDeEntrada: process.argv.splice(2),
             sistemaOperativo: process.platform,
@@ -218,7 +229,10 @@ const server = ()=>{
         }
     })
     
-    
+    app.all('*', (req,res)=>{
+        logger.warn(`Se intento entrar a la ruta ${req.url}, con el metodo ${req.method}`)
+        res.send(`error`)
+    })
     
     
     
@@ -228,7 +242,7 @@ const server = ()=>{
     
     
     io.on('connection', async(socket) => {
-        console.log('un usuario se ha conectado')
+        logger.info('un usuario se ha conectado')
         socket.emit('listadoProductos', await db.getAll())
         
         socket.on('productoAgregado', async (data) => {
@@ -292,7 +306,7 @@ const server = ()=>{
     
     
     httpServer.listen(argumentos.PORT, () => {
-        console.log(`Servidor Iniciado en el puerto:`, argumentos.PORT)
+        logger.info(`Servidor Iniciado en el puerto:`, argumentos.PORT)
     })
 }
 

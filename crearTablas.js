@@ -1,5 +1,7 @@
 import knex from "knex";
 import Configuraciones from "./src/config.js";
+import logger from "./src/Loggers/loggers.js";
+
 
 
 const db = knex(Configuraciones.sqliteConfig)
@@ -7,7 +9,7 @@ const dbMySQL = knex(Configuraciones.mySQL)
 const creacionDeTablas = ()=>{
     db.schema.hasTable('tablaMensajes').then(function (exists) {
             if (!exists) {
-                console.log('Se ha creado tablaMensajes')
+                logger.info('Se ha creado tablaMensajes')
                 return db.schema.createTable('tablaMensajes', (table) => {
                     table.increments("ID")
                     table.string("email").notNullable()
@@ -15,7 +17,7 @@ const creacionDeTablas = ()=>{
                     table.string("msj").notNullable()
                 });
             } else {
-                console.log('La tabla -tablaMensajes- ya esta creada')
+                logger.info('La tabla -tablaMensajes- ya esta creada')
             }
         })
         .catch((e) => {
@@ -28,7 +30,7 @@ const creacionDeTablas = ()=>{
     
     dbMySQL.schema.hasTable('productos').then(function (exists) {
             if (!exists) {
-                console.log('Tabla Creada')
+                logger.info('Tabla Creada')
                 return dbMySQL.schema.createTable('productos', (table) => {
                     table.increments("ID")
                     table.string("Nombre", 30).notNullable()
@@ -40,7 +42,7 @@ const creacionDeTablas = ()=>{
                     table.string("Timestamp")
                 });
             } else {
-                console.log('La tabla -productos- ya esta creada')
+                logger.info('La tabla -productos- ya esta creada')
             }
         })
         .catch((e) => {

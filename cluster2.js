@@ -6,7 +6,7 @@ import {fork} from 'child_process'
 const app = express()
 const PORT = process.argv[2] || 8080
 const MODO = process.argv[3] || "FORK"
-console.log('hola')
+
 
 const cpu = cpus().length
 const forked = fork('./child.js')

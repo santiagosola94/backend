@@ -1,10 +1,12 @@
 import mongoose from 'mongoose'
+import logger from '../Loggers/loggers.js'
 
 mongoose.connect('mongodb+srv://coderAdministrador:estrella1724@cluster0.egttbnl.mongodb.net/usuarios', (err)=>{
     if (err) {
-        return console.log('No se pudo conectar a mongo Atlas', err)
+        logger.error(`No se pudo conectar a mongo Atlas ${err}`)
+        throw new Error(err)
     } else{
-        return console.log('Conectado a Mongo')
+        return logger.info('Conectado a Mongo')
     }
 })
 

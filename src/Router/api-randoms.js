@@ -6,13 +6,13 @@ const forked = fork('./src/Router/child.js')
 const routerAleatorio = Router()
 
 routerAleatorio.get('/api/randoms', (req,res)=>{
-    let {cant} = req.query
+    /*let {cant} = req.query
     forked.send({mensaje: 'inicio', cant})
 
     forked.on('message', msg =>{
         console.log(msg)
     } )
-
+*/
     res.send('test')
 })
 
