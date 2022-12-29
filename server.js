@@ -31,6 +31,7 @@ import {cpus} from 'os'
 import compression from 'compression'
 import logger from './src/Loggers/loggers.js';
 
+const PORT = process.env.PORT || 8080;
 
 
 
@@ -305,8 +306,8 @@ const server = ()=>{
     })
     
     
-    httpServer.listen(process.env.PORT, () => {
-        logger.info(`Servidor Iniciado en el puerto:`, argumentos.PORT)
+    httpServer.listen(PORT, () => {
+        logger.info(`Servidor Iniciado en el puerto:`, PORT)
     })
 }
 
