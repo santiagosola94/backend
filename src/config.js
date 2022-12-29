@@ -1,14 +1,22 @@
+const MYSQLDATABASE = "railway"
+const MYSQLHOST = "containers-us-west-135.railway.app"
+const MYSQLPASSWORD = "Ydp2KETOQhIkNBW02TwD"
+const MYSQLPORT = 5981
+const MYSQLUSER = "root"
+const MYSQL_URL = `mysql://${{ MYSQLUSER }}:${{ MYSQLPASSWORD }}@${{ MYSQLHOST }}:${{ MYSQLPORT }}/${{ MYSQLDATABASE }}`
+
 const Configuraciones = {
     fileSystem: {
         path: './db'
     },
     mySQL: {
-        client: "mysql",
+        client: "mysql2",
         connection: {
-            host: "localhost",
-            port: 3306,
-            user: "root",
-            database: "entrega8"
+            user: MYSQLUSER,
+            password: MYSQLPASSWORD,
+            host: MYSQLHOST,
+            port: MYSQLPORT,
+            database: MYSQLDATABASE
         }
     },
     sqliteConfig: {
